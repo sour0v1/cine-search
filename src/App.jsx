@@ -10,34 +10,27 @@ function App() {
   const handleValue = (e) => {
     e.preventDefault();
     let textValue = e.target.text.value;
-
-    // setValue(title);
-    // setLoading(true);
     console.log(textValue);
     setValue(textValue);
     textValue && setLoading(true);
     e.target.text.value = '';
 
   }
-  // console.log(value)
-
   useEffect(() => {
-    // setLoading(true)
-    // console.log('hello')
     value && fetch(`https://www.omdbapi.com/?t=${value}&apikey=892d9f68`)
       .then(res => res.json())
       .then(data => { setLoading(false); setData(data) })
-
   }, [value])
-  // console.log(data);
+
+  console.log(data);
 
   return (
     <>
-
-      <h1 className='text-2xl'>Vite + React</h1>
-      <form action="" onSubmit={handleValue}>
-        <input className='border-2' type="text" name='text' />
-        <input className='bg-gray-200 border m-4' type="submit" />
+      <form onSubmit={handleValue}>
+        <div className='flex gap-2 items-center justify-center'>
+          <input className='bg-gray-100 outline-none rounded-full px-6 py-2 w-1/2' type="text" placeholder='Type movie name here...' name='text' />
+          <input className='bg-gray-200 px-3 py-2 rounded-xl font-medium hover:bg-gray-50 hover:border-2' type="submit" value={'Search'} />
+        </div>
       </form>
       <div className='flex justify-center items-center'>
         {
@@ -53,11 +46,18 @@ function App() {
           />
         }
       </div>
-      <img src={data.Poster} alt="" />
-      <div>
-      {
-        data.Response === 'False' && <h1>Not found this movie</h1>
-      }
+      <div className='flex justify-center items-center mt-9'>
+        <div>
+        <img src={data.Poster} alt="" />
+        </div>
+        <div>
+          <h1>{data.title}</h1>
+        </div>
+      </div>
+      <div className='flex justify-center items-center'>
+        {
+          data.Response === 'False' && <h1>Not found this movie</h1>
+        }
       </div>
 
     </>

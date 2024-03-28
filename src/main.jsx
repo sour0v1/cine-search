@@ -9,6 +9,7 @@ import {
 import Root from './components/Root/Root.jsx';
 import Home from './components/Home.jsx';
 import Favorites from './components/Favorites.jsx';
+import Search from './components/Search.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path : '/favorites',
         element : <Favorites></Favorites>
+      },
+      {
+        path : '/movie-search',
+        element : <App></App>
       }
     ]
   },
